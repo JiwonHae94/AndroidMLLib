@@ -2,7 +2,7 @@ package com.jiwon.lib_ai.model.exe
 
 class ExecutionOption private constructor(private val builder : Builder) {
     enum class DELEGATE {
-        CPU, GPU, XNNPACK, NNAPI
+        CPU, GPU, XNNPACK, NNAPI, DALVIK
     }
 
     internal val numThread : Int = builder.numThread

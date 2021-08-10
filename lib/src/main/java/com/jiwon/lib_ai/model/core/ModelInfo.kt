@@ -5,7 +5,6 @@ class ModelInfo(private val builder : Builder) {
     internal var inputShape : IntArray? = builder.inputShape
 
     class Builder(internal val modelName : String){
-        internal var inputWidth : Int? = null
         internal var inputShape : IntArray? = null
     }
 }
