@@ -1,8 +1,6 @@
 package com.jiwon.lib_ai.model.tflite
 
-import android.util.Log
-import com.jiwon.lib_ai.LibAi
-import com.jiwon.lib_ai.model.core.ModelLoader
+import com.jiwon.lib_ai.LibAI
 import com.jiwon.lib_ai.model.exe.ExecutionOption
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.CompatibilityList
@@ -38,8 +36,8 @@ class TfliteLoader: ModelLoader<Interpreter> {
     }
 
     override fun loadModel(modelName: String): Interpreter {
-        return if(isAssetFile(LibAi.getApplicationContext().assets, modelName)) {
-            Interpreter(FileUtil.loadMappedFile(LibAi.getApplicationContext(), modelName), tfliteExeOption)
+        return if(isAssetFile(LibAI.getApplicationContext().assets, modelName)) {
+            Interpreter(FileUtil.loadMappedFile(LibAI.getApplicationContext(), modelName), tfliteExeOption)
         }else{
             Interpreter(ByteBuffer.wrap(File(modelName).readBytes()), tfliteExeOption)
         }

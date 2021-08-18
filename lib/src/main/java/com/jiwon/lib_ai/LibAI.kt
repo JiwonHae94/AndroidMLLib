@@ -3,12 +3,12 @@ package com.jiwon.lib_ai
 import android.content.Context
 import java.lang.NullPointerException
 
-class LibAi private constructor(private val context : Context){
+class LibAI private constructor(private val context : Context){
     val applicationContext : Context
         get() { return context }
 
     companion object{
-        private var libAI : LibAi ? = null
+        private var libAI : LibAI ? = null
         private var context : Context? = null
 
         fun init(context:Context){
@@ -16,7 +16,7 @@ class LibAi private constructor(private val context : Context){
 
             synchronized(this){
                 this.context = context
-                libAI = LibAi(context)
+                libAI = LibAI(context)
             }
         }
 
@@ -27,7 +27,7 @@ class LibAi private constructor(private val context : Context){
         }
 
         @Throws(NullPointerException::class)
-        fun getInstance() : LibAi{
+        fun getInstance() : LibAI{
             libAI?.let{} ?: throw NullPointerException("library has not been initialized")
             return libAI!!
         }

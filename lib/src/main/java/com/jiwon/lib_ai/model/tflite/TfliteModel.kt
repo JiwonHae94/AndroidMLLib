@@ -3,7 +3,6 @@ package com.jiwon.lib_ai.model.tflite
 import com.jiwon.lib_ai.model.core.Model
 import com.jiwon.lib_ai.model.core.ModelInfo
 import android.content.Context
-import com.jiwon.lib_ai.model.core.ModelLoader
 import com.jiwon.lib_ai.model.exe.ExecutionOption
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter

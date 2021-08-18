@@ -1,6 +1,7 @@
 package com.jiwon.lib_ai.model.core
 
 import com.jiwon.lib_ai.model.listener.ModelInferenceListener
+import com.jiwon.lib_ai.model.loader.ModelLoader
 
 /**
  * Model is the base class for any type of models
@@ -14,7 +15,7 @@ abstract class Model<IType> {
     protected var modelInferenceListener : ModelInferenceListener? = null
 
     protected open fun loadModel(modelInfo : ModelInfo) : IType{
-        return modelLoader.loadModel(modelInfo.modelName)
+        return modelLoader.load(modelName = modelInfo.modelName)
     }
 
     protected abstract fun run(vararg var1 : Any)
