@@ -1,7 +1,7 @@
-package com.jiwon.lib_ai.support.image.bm
+package com.jiwon.lib_ai.model.support.image.bm
 
 import android.graphics.Bitmap
-import com.jiwon.lib_ai.support.image.ImageOperator
+import com.jiwon.lib_ai.model.support.image.ImageOperator
 
 class CropOperator(val param : Any) : ImageOperator() {
     override fun apply(var1: Bitmap): Bitmap {

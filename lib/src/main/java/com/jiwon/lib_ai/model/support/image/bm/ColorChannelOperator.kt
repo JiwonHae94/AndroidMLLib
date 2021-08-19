@@ -1,7 +1,7 @@
-package com.jiwon.lib_ai.support.image.bm
+package com.jiwon.lib_ai.model.support.image.bm
 
 import android.graphics.Bitmap
-import com.jiwon.lib_ai.support.core.Operator
+import com.jiwon.lib_ai.model.support.core.Operator
 import org.opencv.android.Utils
 import org.opencv.core.CvType
 import org.opencv.core.Mat

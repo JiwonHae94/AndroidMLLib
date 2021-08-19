@@ -12,7 +12,7 @@ object Utility {
         val file = File(context.filesDir, fileName)
 
         if (file.exists() && file.length() > 0) {
-            return file.getAbsolutePath()
+            return file.absolutePath
         }
 
         context.assets.open(fileName).use { inputStream ->

@@ -1,6 +1,6 @@
-package com.jiwon.lib_ai.support.image.mat
+package com.jiwon.lib_ai.model.support.image.mat
 
-import com.jiwon.lib_ai.support.image.MatrixOperator
+import com.jiwon.lib_ai.model.support.image.MatrixOperator
 import org.opencv.core.Mat
 import org.opencv.core.Rect
 

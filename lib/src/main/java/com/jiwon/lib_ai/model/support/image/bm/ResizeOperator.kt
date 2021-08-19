@@ -1,10 +1,10 @@
-package com.jiwon.lib_ai.support.image.bm
+package com.jiwon.lib_ai.model.support.image.bm
 
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.util.Log
 import android.util.Size
-import com.jiwon.lib_ai.support.image.ImageOperator
+import com.jiwon.lib_ai.model.support.image.ImageOperator
 
 class ResizeOperator(val param : Any) : ImageOperator() {
     private val TAG = ResizeOperator::class.java.simpleName
