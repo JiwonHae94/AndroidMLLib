@@ -19,6 +19,15 @@ abstract class Model<IType> {
 
     protected val runtimeConfig : RuntimeConfig
 
+    protected val inputWidth : Int
+        get() = inputShape.first()[1]
+
+    protected val inputHeight : Int
+        get() = inputShape.first()[2]
+
+    protected val inputChannels : Int
+        get() = inputShape.first()[3]
+
     protected val inputShape : Array<IntArray>
         get() = modelInfo.inputShape ?: getInputShapeFromModel()
 
@@ -34,6 +43,8 @@ abstract class Model<IType> {
         this.modelInfo = modelInfo
         this.runtimeConfig = runtimeConfig
         this.interpreter = loadModel()
+
+        initializeModel()
     }
 
     protected abstract val modelLoader : ModelLoader<IType>

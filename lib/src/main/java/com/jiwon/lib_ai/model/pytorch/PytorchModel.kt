@@ -11,11 +11,16 @@ import org.pytorch.Tensor
 abstract class PytorchModel<ModelOutputT> : Model<Module> {
     final override val modelLoader : PytorchLoader
 
-    override val inputShape: IntArray
-
     constructor(context: Context, modelInfo : ModelInfo, runtimeConfig : RuntimeConfig) : super(context, modelInfo, runtimeConfig){
-        this.inputShape = modelInfo.inputShape ?: intArrayOf(-1, -1)
         this.modelLoader = PytorchLoader(context)
+    }
+
+    final override fun getInputShapeFromModel(): Array<IntArray> {
+        throw IllegalArgumentException("Pytorch does not support getting shape from the model. Parameters must be set manually")
+    }
+
+    final override fun getOutputShapeFromModel(): Array<IntArray> {
+        throw IllegalArgumentException("Pytorch does not support getting shape from the model. Parameters must be set manually")
     }
 
     /**

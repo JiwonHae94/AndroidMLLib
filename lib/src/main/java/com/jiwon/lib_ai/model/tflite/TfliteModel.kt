@@ -16,7 +16,7 @@ import org.tensorflow.lite.DataType
 abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
     private val TAG = TfliteModel::class.java.simpleName
 
-    final override val modelLoader: TfliteLoader
+    final override val modelLoader: TfliteLoader = TfliteLoader(context)
 
     protected val inferenceOutput : HashMap<Int, Any> = HashMap()
 
@@ -36,9 +36,7 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
         return shape.toTypedArray()
     }
 
-    constructor(context:Context, modelInfo: ModelInfo, runtimeConfig: RuntimeConfig) : super(context, modelInfo, runtimeConfig){
-        this.modelLoader = TfliteLoader(context)
-    }
+    constructor(context:Context, modelInfo: ModelInfo, runtimeConfig: RuntimeConfig) : super(context, modelInfo, runtimeConfig)
 
     override fun loadModel(): Interpreter {
         return modelLoader.loadAssetModel(modelInfo.modelName, runtimeConfig)
@@ -50,17 +48,16 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
      */
     @Throws(IllegalArgumentException::class)
     protected open fun configureInferenceOutput(){
-        /*val outputShape = modelInfo.outputShape ?: return defaultConfiguration()
+        val modelType = convertDataType(modelInfo.dataType)
 
-        require(modelInfo.dataType != null){ "model info must be appropriately set" }
-
-        val outputBuffer = getTensorOutput(outputShape, convertDataType(modelInfo.dataType!!))
-        outputBuffer?.let{} ?: throw IllegalArgumentException("invalid input shape is given, please check with the model developer")
-
-        inferenceOutput.put(0, outputBuffer)*/
+        outputShape.forEachIndexed{index: Int, shape: IntArray ->
+            val outputBuffer = getTensorOutput(shape, modelType ?: interpreter.getOutputTensor(index).dataType())
+            inferenceOutput.put(index, outputBuffer.buffer.rewind())
+        }
     }
 
-    protected fun convertDataType(dataType: com.jiwon.lib_ai.model.DataType) : DataType {
+    protected fun convertDataType(dataType: com.jiwon.lib_ai.model.DataType?) : DataType? {
+        dataType?.let{} ?: return null
         return when(dataType){
             com.jiwon.lib_ai.model.DataType.FLOAT32 -> DataType.FLOAT32
             com.jiwon.lib_ai.model.DataType.INT32   -> DataType.INT32
@@ -69,17 +66,6 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
             com.jiwon.lib_ai.model.DataType.STRING  -> DataType.STRING
             com.jiwon.lib_ai.model.DataType.INT8    -> DataType.INT8
         }
-    }
-
-    private fun defaultConfiguration(){
-        val outputTensor = interpreter.getOutputTensor(0)
-        val outputType = outputTensor.dataType()
-        val outputShape = outputTensor.shape()
-
-        val outputBuffer = getTensorOutput(outputShape, outputType)
-        outputBuffer?.let{} ?: throw IllegalArgumentException("invalid input shape is given, please check with the model developer")
-
-        inferenceOutput.put(0, outputBuffer)
     }
 
     override fun initializeModel() {
@@ -103,12 +89,8 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
     }
 
     companion object{
-        fun getTensorOutput(size : IntArray, dataType : DataType) : TensorBuffer? {
-            return try{
-                TensorBuffer.createFixedSize(size, dataType)
-            }catch(e: Exception){
-                null
-            }
+        fun getTensorOutput(size : IntArray, dataType : DataType) : TensorBuffer {
+            return TensorBuffer.createFixedSize(size, dataType)
         }
     }
 
