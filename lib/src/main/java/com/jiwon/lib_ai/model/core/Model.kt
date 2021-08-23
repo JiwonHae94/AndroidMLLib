@@ -38,14 +38,16 @@ abstract class Model<IType> {
 
     abstract fun getOutputShapeFromModel() : Array<IntArray>
 
-    constructor(context:Context, modelInfo : ModelInfo, runtimeConfig : RuntimeConfig){
+    constructor(context:Context, modelInfo : ModelInfo, runtimeConfig : RuntimeConfig?){
         this.context = context
         this.modelInfo = modelInfo
-        this.runtimeConfig = runtimeConfig
+        this.runtimeConfig = runtimeConfig ?: defaultRuntimeConfig
         this.interpreter = loadModel()
 
         initializeModel()
     }
+
+    private val defaultRuntimeConfig = RuntimeConfig.Builder().build()
 
     protected abstract val modelLoader : ModelLoader<IType>
 

@@ -1,7 +1,5 @@
 package com.jiwon.lib_ai.model.core
 
-import com.jiwon.lib_ai.model.DataType
-
 class ModelInfo(private val builder : Builder) {
     internal val modelName : String = builder.modelName
 

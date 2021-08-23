@@ -9,7 +9,6 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.lang.IllegalArgumentException
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.jiwon.lib_ai.model.loader.TfliteLoader
 import org.tensorflow.lite.DataType
 
@@ -36,7 +35,7 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
         return shape.toTypedArray()
     }
 
-    constructor(context:Context, modelInfo: ModelInfo, runtimeConfig: RuntimeConfig) : super(context, modelInfo, runtimeConfig)
+    constructor(context:Context, modelInfo: ModelInfo, runtimeConfig: RuntimeConfig? = null) : super(context, modelInfo, runtimeConfig)
 
     override fun loadModel(): Interpreter {
         return modelLoader.loadAssetModel(modelInfo.modelName, runtimeConfig)
@@ -56,15 +55,15 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
         }
     }
 
-    protected fun convertDataType(dataType: com.jiwon.lib_ai.model.DataType?) : DataType? {
+    protected fun convertDataType(dataType: com.jiwon.lib_ai.model.core.DataType?) : DataType? {
         dataType?.let{} ?: return null
         return when(dataType){
-            com.jiwon.lib_ai.model.DataType.FLOAT32 -> DataType.FLOAT32
-            com.jiwon.lib_ai.model.DataType.INT32   -> DataType.INT32
-            com.jiwon.lib_ai.model.DataType.UINT8   -> DataType.UINT8
-            com.jiwon.lib_ai.model.DataType.INT64   -> DataType.INT64
-            com.jiwon.lib_ai.model.DataType.STRING  -> DataType.STRING
-            com.jiwon.lib_ai.model.DataType.INT8    -> DataType.INT8
+            com.jiwon.lib_ai.model.core.DataType.FLOAT32 -> DataType.FLOAT32
+            com.jiwon.lib_ai.model.core.DataType.INT32   -> DataType.INT32
+            com.jiwon.lib_ai.model.core.DataType.UINT8   -> DataType.UINT8
+            com.jiwon.lib_ai.model.core.DataType.INT64   -> DataType.INT64
+            com.jiwon.lib_ai.model.core.DataType.STRING  -> DataType.STRING
+            com.jiwon.lib_ai.model.core.DataType.INT8    -> DataType.INT8
         }
     }
 

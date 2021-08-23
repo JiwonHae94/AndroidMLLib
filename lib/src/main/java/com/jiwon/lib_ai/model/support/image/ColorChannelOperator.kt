@@ -1,10 +1,9 @@
-package com.jiwon.lib_ai.model.support.image.mat
+package com.jiwon.lib_ai.model.support.image
 
-import com.jiwon.lib_ai.model.support.core.Operator
 import org.opencv.core.Mat
 import org.opencv.imgproc.Imgproc
 
-class ColorChannelOperator(val channel: Conversion) : Operator<Mat, Mat> {
+class ColorChannelOperator(val channel: Conversion) : ImageOperator() {
     override fun apply(var1: Mat): Mat {
         var1.channels()
         val conv = when(channel){

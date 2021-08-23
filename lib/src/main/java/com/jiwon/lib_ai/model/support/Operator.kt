@@ -1,4 +1,4 @@
-package com.jiwon.lib_ai.model.support.core
+package com.jiwon.lib_ai.model.support
 
 interface Operator<IType, OType> {
     fun apply(var1 : IType) : OType
