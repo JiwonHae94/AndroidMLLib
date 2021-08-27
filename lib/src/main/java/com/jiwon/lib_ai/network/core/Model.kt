@@ -1,8 +1,8 @@
-package com.jiwon.lib_ai.model.core
+package com.jiwon.lib_ai.network.core
 
-import com.jiwon.lib_ai.model.loader.ModelLoader
+import com.jiwon.lib_ai.network.loader.ModelLoader
 import android.content.Context
-import com.jiwon.lib_ai.model.RuntimeConfig
+import com.jiwon.lib_ai.network.RuntimeConfig
 
 /**
  * Model is the base class for any type of models

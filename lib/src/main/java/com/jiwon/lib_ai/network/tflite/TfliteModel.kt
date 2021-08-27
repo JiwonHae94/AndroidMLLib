@@ -1,15 +1,15 @@
-package com.jiwon.lib_ai.model.tflite
+package com.jiwon.lib_ai.network.tflite
 
-import com.jiwon.lib_ai.model.core.Model
-import com.jiwon.lib_ai.model.core.ModelInfo
+import com.jiwon.lib_ai.network.core.Model
+import com.jiwon.lib_ai.network.core.ModelInfo
 import android.content.Context
-import com.jiwon.lib_ai.model.RuntimeConfig
+import com.jiwon.lib_ai.network.RuntimeConfig
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.lang.IllegalArgumentException
 import android.util.Log
-import com.jiwon.lib_ai.model.loader.TfliteLoader
+import com.jiwon.lib_ai.network.loader.TfliteLoader
 import org.tensorflow.lite.DataType
 
 abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
@@ -55,15 +55,15 @@ abstract class TfliteModel<ModelOutputT> : Model<Interpreter> {
         }
     }
 
-    protected fun convertDataType(dataType: com.jiwon.lib_ai.model.core.DataType?) : DataType? {
+    protected fun convertDataType(dataType: com.jiwon.lib_ai.network.DataType?) : DataType? {
         dataType?.let{} ?: return null
         return when(dataType){
-            com.jiwon.lib_ai.model.core.DataType.FLOAT32 -> DataType.FLOAT32
-            com.jiwon.lib_ai.model.core.DataType.INT32   -> DataType.INT32
-            com.jiwon.lib_ai.model.core.DataType.UINT8   -> DataType.UINT8
-            com.jiwon.lib_ai.model.core.DataType.INT64   -> DataType.INT64
-            com.jiwon.lib_ai.model.core.DataType.STRING  -> DataType.STRING
-            com.jiwon.lib_ai.model.core.DataType.INT8    -> DataType.INT8
+            com.jiwon.lib_ai.network.DataType.FLOAT32 -> DataType.FLOAT32
+            com.jiwon.lib_ai.network.DataType.INT32   -> DataType.INT32
+            com.jiwon.lib_ai.network.DataType.UINT8   -> DataType.UINT8
+            com.jiwon.lib_ai.network.DataType.INT64   -> DataType.INT64
+            com.jiwon.lib_ai.network.DataType.STRING  -> DataType.STRING
+            com.jiwon.lib_ai.network.DataType.INT8    -> DataType.INT8
         }
     }
 

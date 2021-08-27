@@ -1,8 +1,8 @@
-package com.jiwon.lib_ai.model.loader
+package com.jiwon.lib_ai.network.loader
 
 import org.tensorflow.lite.Interpreter
 import android.content.Context
-import com.jiwon.lib_ai.model.RuntimeConfig
+import com.jiwon.lib_ai.network.RuntimeConfig
 import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.gpu.GpuDelegate
 import org.tensorflow.lite.support.common.FileUtil

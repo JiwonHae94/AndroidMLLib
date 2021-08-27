@@ -1,11 +1,12 @@
-package com.jiwon.lib_ai.model.pytorch
+package com.jiwon.lib_ai.network.support.image
 
-import com.jiwon.lib_ai.model.core.DataType
+import com.jiwon.lib_ai.network.DataType
+import java.lang.NullPointerException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.*
 
-abstract class TorchBuffer {
+abstract class NetBuffer {
     var buffer: ByteBuffer? = null
     protected lateinit var _shape: IntArray
 
@@ -86,24 +87,26 @@ abstract class TorchBuffer {
     }
 
     companion object{
-        fun createFixedSize(shape : IntArray, dataType : DataType) : TorchBuffer{
+        fun createFixedSize(shape : IntArray, dataType : DataType) : NetBuffer {
             return when(dataType){
-                DataType.FLOAT32-> TorchBufferFloat(shape)
-                DataType.INT32 -> TorchBufferUint8(shape)
+                DataType.FLOAT32-> NetBufferFloat(shape)
+                DataType.INT32 -> NetBufferUint8(shape)
                 else-> throw AssertionError("TensorBuffer does not support data type: " + dataType)
             }
         }
 
-        fun createDynamic(dataType : DataType) : TorchBuffer {
+        fun createDynamic(dataType : DataType) : NetBuffer {
             return when(dataType){
-                DataType.FLOAT32-> TorchBufferFloat()
-                DataType.INT32 -> TorchBufferUint8()
+                DataType.FLOAT32-> NetBufferFloat()
+                DataType.INT32 -> NetBufferUint8()
                 else-> throw AssertionError("TensorBuffer does not support data type: " + dataType)
             }
         }
 
-        fun createFrom(buffer : TorchBuffer, dataType : DataType) : TorchBuffer{
-            val result : TorchBuffer = if(buffer.isDynamic) createDynamic(dataType)!! else createFixedSize(buffer._shape!!, dataType)!!
+        fun createFrom(buffer : NetBuffer?, dataType : DataType) : NetBuffer {
+            buffer ?: throw NullPointerException("Buffer must not be null")
+
+            val result : NetBuffer = if(buffer.isDynamic) createDynamic(dataType)!! else createFixedSize(buffer._shape!!, dataType)!!
 
             if(buffer.dataType == DataType.FLOAT32 && dataType == DataType.FLOAT32){
                 val data = buffer.floatArray
@@ -144,8 +147,7 @@ abstract class TorchBuffer {
         }
     }
 
-
-    private class TorchBufferFloat : TorchBuffer{
+    private class NetBufferFloat : NetBuffer {
         constructor(shape : IntArray) : super(shape)
         constructor() : super()
 
@@ -200,7 +202,7 @@ abstract class TorchBuffer {
         }
     }
 
-    private class TorchBufferUint8 : TorchBuffer{
+    private class NetBufferUint8 : NetBuffer {
         constructor(shape : IntArray) : super(shape)
         constructor() : super()
 

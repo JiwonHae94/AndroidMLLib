@@ -1,12 +1,12 @@
-package com.jiwon.lib_ai.model.support
+package com.jiwon.lib_ai.network.support
 
 import android.graphics.Bitmap
-import com.jiwon.lib_ai.model.core.DataType
-import com.jiwon.lib_ai.model.core.DataType.Companion.toTfliteType
-import com.jiwon.lib_ai.model.core.InterpreterType
-import com.jiwon.lib_ai.model.support.image.ImageOperator
-import com.jiwon.lib_ai.model.support.image.ImageOperator.Companion.toBitmap
-import com.jiwon.lib_ai.model.support.image.ImageOperator.Companion.toMat
+import com.jiwon.lib_ai.network.DataType
+import com.jiwon.lib_ai.network.DataType.Companion.toTfliteType
+import com.jiwon.lib_ai.network.core.InterpreterType
+import com.jiwon.lib_ai.network.support.image.ops.ImageOp
+import com.jiwon.lib_ai.network.support.image.ops.ImageOp.Companion.toBitmap
+import com.jiwon.lib_ai.network.support.image.ops.ImageOp.Companion.toMat
 import org.tensorflow.lite.support.image.TensorImage
 import java.lang.IllegalArgumentException
 import java.nio.ByteOrder
@@ -55,12 +55,12 @@ class ImageProcessor private constructor(val builder : Builder) {
 
 
     class Builder(val platform : InterpreterType, val datatype : DataType){
-        internal val processSequence = ArrayList<ImageOperator>()
+        internal val processSequence = ArrayList<ImageOp>()
         internal val others = ArrayList<Operator<Any, Any>>()
 
         fun add(op : Operator<Any, Any>) : Builder {
             when(op){
-                is ImageOperator-> processSequence.add(op)
+                is ImageOp -> processSequence.add(op)
                 else -> others.add(op)
             }
             return this

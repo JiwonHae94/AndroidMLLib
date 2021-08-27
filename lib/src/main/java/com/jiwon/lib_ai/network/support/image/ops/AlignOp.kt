@@ -1,5 +1,6 @@
-package com.jiwon.lib_ai.model.support.image
+package com.jiwon.lib_ai.network.support.image.ops
 
+import com.jiwon.lib_ai.network.support.image.NetImage
 import org.opencv.core.Mat
 import org.opencv.core.MatOfPoint2f
 import org.opencv.core.Point
@@ -8,11 +9,12 @@ import org.opencv.imgproc.Imgproc
 import java.lang.NullPointerException
 import java.nio.DoubleBuffer
 
-class AlignOp (val landmarks : DoubleBuffer) : ImageOperator() {
-    override fun apply(var1: Mat): Mat {
+class AlignOp (val landmarks : DoubleBuffer) : ImageOp() {
+    override fun apply(var1: NetImage) {
         if(landmarks.array().isEmpty())
             throw NullPointerException("not sufficient landmark is provided")
 
+        val srcMat = var1.mat
         val left_eye = doubleArrayOf(landmarks.get(0), landmarks.get(1))
         val right_eye = doubleArrayOf(landmarks.get(2), landmarks.get(3))
         val mouse_left = doubleArrayOf(landmarks.get(6), landmarks.get(7))
@@ -127,8 +129,7 @@ class AlignOp (val landmarks : DoubleBuffer) : ImageOperator() {
         matPt_dst.fromList(dstPoints)
 
         val tfm = Imgproc.getPerspectiveTransform(matPt_src, matPt_dst)
-        Imgproc.warpPerspective(var1, var1, tfm, Size(maxWidth, maxHeight))
-
-        return var1
+        Imgproc.warpPerspective(srcMat, srcMat, tfm, Size(maxWidth, maxHeight))
+        var1.load(srcMat)
     }
 }

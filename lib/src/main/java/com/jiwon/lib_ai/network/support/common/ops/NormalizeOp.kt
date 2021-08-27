@@ -1,7 +1,6 @@
-package com.jiwon.lib_ai.model.support.common
+package com.jiwon.lib_ai.network.support.common.ops
 
-import com.jiwon.lib_ai.model.pytorch.TorchBuffer
-import com.jiwon.lib_ai.model.support.Operator
+import com.jiwon.lib_ai.network.support.Operator
 import org.pytorch.MemoryFormat
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.common.SupportPreconditions

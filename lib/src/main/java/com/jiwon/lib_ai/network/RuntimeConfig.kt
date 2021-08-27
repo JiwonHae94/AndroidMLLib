@@ -1,4 +1,4 @@
-package com.jiwon.lib_ai.model
+package com.jiwon.lib_ai.network
 
 class RuntimeConfig private constructor(private val builder : Builder) {
     enum class Delegate {

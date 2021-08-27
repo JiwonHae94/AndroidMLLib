@@ -1,9 +1,9 @@
-package com.jiwon.lib_ai.model.loader
+package com.jiwon.lib_ai.network.loader
 
 import org.pytorch.Module
 import android.content.Context
 import com.jiwon.lib_ai.Utility
-import com.jiwon.lib_ai.model.RuntimeConfig
+import com.jiwon.lib_ai.network.RuntimeConfig
 import org.pytorch.LiteModuleLoader
 import org.pytorch.PyTorchAndroid
 import java.io.File

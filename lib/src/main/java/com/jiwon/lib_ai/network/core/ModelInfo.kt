@@ -1,4 +1,6 @@
-package com.jiwon.lib_ai.model.core
+package com.jiwon.lib_ai.network.core
+
+import com.jiwon.lib_ai.network.DataType
 
 class ModelInfo(private val builder : Builder) {
     internal val modelName : String = builder.modelName

@@ -1,4 +1,4 @@
-package com.jiwon.lib_ai.model.core
+package com.jiwon.lib_ai.network.core
 
 enum class InterpreterType {
     tflite,

@@ -1,7 +1,7 @@
-package com.jiwon.lib_ai.model.loader
+package com.jiwon.lib_ai.network.loader
 
 import android.content.Context
-import com.jiwon.lib_ai.model.RuntimeConfig
+import com.jiwon.lib_ai.network.RuntimeConfig
 import java.io.IOException
 
 abstract class ModelLoader<InterpreterT>(val context:Context)  {

@@ -1,4 +1,4 @@
-package com.jiwon.lib_ai.model.core
+package com.jiwon.lib_ai.network
 
 enum class DataType(val value : Int) {
     FLOAT32(1),

@@ -1,10 +1,10 @@
-package com.jiwon.lib_ai.model.pytorch
+package com.jiwon.lib_ai.network.pytorch
 
 import android.content.Context
-import com.jiwon.lib_ai.model.core.Model
-import com.jiwon.lib_ai.model.core.ModelInfo
-import com.jiwon.lib_ai.model.RuntimeConfig
-import com.jiwon.lib_ai.model.loader.PytorchLoader
+import com.jiwon.lib_ai.network.core.Model
+import com.jiwon.lib_ai.network.core.ModelInfo
+import com.jiwon.lib_ai.network.RuntimeConfig
+import com.jiwon.lib_ai.network.loader.PytorchLoader
 import org.pytorch.Module
 import org.pytorch.Tensor
 
